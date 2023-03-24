@@ -1,0 +1,35 @@
+<div class="loginPage">
+	<div class="box">
+		<div class="inner">
+			<!-- <div class="logo">
+				<img src="../../../assets/images/world-cup-2.png" alt="logo">
+			</div> -->
+			
+			<div class="text">MACA</div>
+			
+			<div class="form">
+				<form autocomplete="off" novalidate [formGroup]="actionForm" (ngSubmit)="submit($event);">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Usuario" #Email maxlength="100" formControlName="email">
+						<mat-hint align="end">{{Email.value.length}}/100</mat-hint>
+					</mat-form-field>
+
+					<mat-form-field>
+						<input type="{{showPassword ? 'text' : 'password'}}" matInput placeholder="Password" #Password maxlength="100" formControlName="password">
+						<button mat-button matSuffix mat-icon-button type="button" (click)="showPassword=!showPassword" tabindex="-1">
+							<mat-icon>{{!showPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+						</button>
+						<mat-hint align="end">{{Password.value.length}}/100</mat-hint>
+					</mat-form-field>
+
+					<div class="buttons">
+						<button mat-raised-button type="submit" [disabled]="submitLoading">
+							<mat-progress-spinner mode="indeterminate" *ngIf="submitLoading"></mat-progress-spinner>
+							Login
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

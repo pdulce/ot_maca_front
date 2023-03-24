@@ -1,0 +1,99 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Itinerario calculado</title>
+    <reference path="orgchart.d.ts" />
+    <link rel="stylesheet" type="text/css" href="tree.css"/>
+    <script src="orgchart.js"></script>
+</head>
+
+<body class="styled-letters" onLoad="callAsyncTree()">
+   
+    <div style="width:100%; height:700px;" id="tree">
+
+    <script>
+
+        function callAsyncTree() {
+            //console.log("charging tree of this element ");
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+
+            let idOfElement = urlParams.get('id');
+            let urlCat = urlParams.get('urlCat');
+            //console.log("tree...urlCat: " + urlCat);
+            if (idOfElement == null){
+                console.log("¡¡Error grave: no viaja el id!!");
+            } else{
+                //console.log("idOfElement: " + idOfElement);
+                fetchRemoteHierarchy(urlCat + 'elementocatalogo/getHierarchyById/'+ idOfElement, recuperarTreeNodes);        
+            }            
+        }
+
+        async function fetchRemoteHierarchy(url, callback) {    
+            await fetch(url)
+                .then(response => response.json())
+                .then(function (response) {
+                    callback({response});
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    callback(null, error);
+                });
+        }
+
+        function recuperarTreeNodes(response, error) {
+            //console.log("ejecutando funcion recuperarTreeNodes...");
+            if (response == null) {
+                console.log(error);
+            } else {
+                let nodelist = response.response;
+                //console.log("recuperarTreeNodes response: " + nodelist);
+                
+                OrgChart.templates.ana.field_0 = '<text class="field_0" style="font-size: 20px;" fill="#ffffff" x="125" y="30" text-anchor="middle">{val}</text>';
+                OrgChart.templates.ana.field_1 = '<text class="field_1" style="font-size: 14px;" fill="#ffffff" x="125" y="50" text-anchor="middle">{val}</text>';
+                OrgChart.templates.ana.field_2 = '<text class="field_2" style="font-size: 14px;" fill="#ffffff" x="125" y="70" text-anchor="middle">{val}</text>';                
+                OrgChart.templates.ana.img_0 = '<clipPath id="ulaImg"><circle cx="100" cy="120" r="40"></circle></clipPath><image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="75" y="82" width="37" height="37"></image>';                
+                OrgChart.templates.olivia.img_0 = '<clipPath id="ulaImg"><circle cx="100" cy="120" r="40"></circle></clipPath><image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="75" y="82" width="37" height="37"></image>';
+                OrgChart.templates.polina.img_0 = '<clipPath id="ulaImg"><circle cx="100" cy="120" r="40"></circle></clipPath><image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="75" y="82" width="37" height="37"></image>';
+         
+                var chart = new OrgChart(document.getElementById("tree"), {
+                    mouseScrool: OrgChart.action.none,
+                    template: "mery",
+                    enableDragDrop: true,
+                    enableSearch: false,                   
+                    menu: {
+                        pdf: { text: "Export PDF" },
+                        png: { text: "Export PNG" },
+                        svg: { text: "Export SVG" },
+                        csv: { text: "Export CSV" }
+                    },
+                tags: {
+                    "Proyecto": {
+                        template: "mery"
+                    },
+                    "Agrupación funcional": {
+                        template: "ana"
+                    },
+                    "Aplicación": {
+                        template: "ana"
+                    },
+                    "Elemento Promocionable": {
+                        template: "ana"
+                    }
+                },
+                nodeBinding: {
+                    field_0: "name",        
+                    field_1: "tipoElem",
+                    field_2: "group",
+                    field_3: "creationDate",
+                    img_0: "img"
+                },
+                nodes: nodelist
+                });
+            }
+        }
+            
+    </script>
+
+</body>
+</html>

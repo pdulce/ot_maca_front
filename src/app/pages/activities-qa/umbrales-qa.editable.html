@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>Edición de Umbrales</h1>
+
+<div mat-dialog-content>  
+  <form autocomplete="off" novalidate [formGroup]="actionForm" (ngSubmit)="submit('save', $event)">
+    
+    <hr/>
+    <span>Umbrales de esta "Actividad QA":  {{this.data.item.name}}</span>   
+    <hr/>
+    <br/>
+    <div class="bar">
+      <div class="title">&nbsp;</div>
+    </div>    
+    
+    <table #tablaUmbrales>
+      <thead>
+        <tr>
+          <th> Nivel de catálogo </th>     
+          <th> Límite inferior </th>
+          <th> Límite superior </th>
+          <th> Umbral de realización </th>          
+          <th> Aplica a entregas </th>    
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dato of umbrales;let i = index">                 
+          <td align="center">{{nivelCatalogueLabels[dato.elemenTypeId-1]}}</td>          
+          <td align="center"><input size="5" maxlength="6" type="text" [name]="'lowerLimit-' + dato.id" [id]="'lowerLimit-' + dato.id" [value]="dato.lowerLimit"></td>        
+          <td align="center"><input size="5" maxlength="6" type="text" [name]="'upperLimit-' + dato.id" [id]="'upperLimit-' + dato.id" [value]="dato.upperLimit"></td>
+          <td align="center"><input size="45" maxlength="100" type="text" [name]="'threshold-' + dato.id" [id]="'threshold-' + dato.id" [value]="dato.threshold"></td>
+          <td align="center">
+            <input type="checkbox" [name]="'forDelivery-' + dato.id" [id]="'forDelivery-' + dato.id" [checked]="dato.forDelivery === 1">
+            <br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <hr/>
+  </form>
+
+<div mat-dialog-actions>
+<button mat-raised-button (click)="submit('cancel', $event)">Cancelar</button>
+<button mat-raised-button (click)="submit('save', $event)" [disabled]="submitLoading">
+  <mat-progress-spinner mode="indeterminate" *ngIf="submitLoading"></mat-progress-spinner>
+  Guardar
+</button>
+<br/><br/>
+</div>
+<br/><br/>

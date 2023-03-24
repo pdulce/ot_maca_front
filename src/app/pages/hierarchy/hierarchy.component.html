@@ -1,0 +1,48 @@
+<div class="content">
+  <div class="head">
+    <div class="title">Jerarquía asociada al elemento de catálogo</div>
+  </div>
+
+  <div class="tableData">
+    <div class="formRO">
+      <div class="title">Descripción</div>
+
+      <div class="inputRO">
+        <div class="label">Código CAPP</div>
+        <div class="input">{{pageParameters.queryData?.item?.cappCode ? pageParameters.queryData?.item?.cappCode : '-'}}</div>
+      </div>
+
+      <div class="inputRO">
+        <div class="label">Nombre</div>
+        <div class="input">{{pageParameters.queryData?.item?.name ? pageParameters.queryData?.item?.name : '-'}}</div>
+      </div>
+
+      <div class="inputRO">
+        <div class="label">Id. elemento en catálogo</div>
+        <div class="input">{{pageParameters.queryData?.item?.id ? pageParameters.queryData?.item?.id : '-'}}</div>
+      </div>
+    
+      <div class="inputRO">
+        <div class="label">Fecha creación</div>
+        <div class="input">{{pageParameters.queryData?.item?.name ? pageParameters.queryData?.item?.creationDate : '-'}}</div>
+      </div>
+
+    </div>
+  </div>
+  
+  
+  <div class="tableChart" *ngIf="(pageParameters.pageStatus == 'data')">
+    <iframe width="1600" height="1050" [src]="iframeUrl" title="YouTube video player" frameborder="0"></iframe>
+  </div>
+
+  <div class="loadingData" *ngIf="pageParameters.pageStatus == 'loading'">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    Generando gráfico ...
+  </div>
+
+  <div class="noData" *ngIf="pageParameters.pageStatus == 'void'">
+    No hay datos
+    <br>
+    No puedo obtenerse la jerarquía para este elemento
+  </div>
+</div>

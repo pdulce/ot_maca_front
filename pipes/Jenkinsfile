@@ -1,0 +1,21 @@
+properties([parameters([
+	string(name: 'FW_VERSION', defaultValue: '3.9.0')
+])])
+
+
+library "GissFwDevOps@${params.FW_VERSION}"
+
+
+FwDevOps("nodejs-16","https://gitlab.pro.portal.ss/ot/mad/ot_maca_front.git",
+[ 
+	
+	"MAVEN_OPTS":"-Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true",
+	"BUILD_ONLY":"false",
+	"HELM_DEPLOY":"true",
+	"CD": "true",
+	"CODE_REVIEW":"true",
+	"UNIT_TEST":"true",
+	"COMPILABLES":"ts"
+]
+)
+

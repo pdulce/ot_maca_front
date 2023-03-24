@@ -1,0 +1,132 @@
+<div class="header">
+  <!-- <div class="header"></div> -->
+
+  <mat-toolbar>
+      <button mat-icon-button aria-label="menu" (click)="openMenu()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span routerLink="/home">MACA</span>
+      <!-- <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>person</mat-icon>
+      </button>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <mat-icon>person</mat-icon>
+      </button> -->
+  </mat-toolbar>
+</div>
+
+<div class="menu" *ngIf="menu" [ngClass]="{'active': nav}">
+  <div class="nav">
+    <div class="user">
+      <div class="avatar"></div>
+      <div class="panel">
+        <div class="texts">
+          <div class="text">{{sessionData.user.name}}</div>
+          <div class="text">{{sessionData.user.roleName}}</div>
+        </div>
+        <div class="logout">
+          <button mat-icon-button  matTooltip="Cerrar sesión" matTooltipPosition="above" matTooltipShowDelay="900" [matMenuTriggerFor]="menu">
+            <mat-icon>logout</mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>highlight_off</mat-icon> Cancelar
+            </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>check_circle_outline</mat-icon> Cerrar sesión
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+    <mat-list>
+      <mat-list-item matRipple routerLink="/home" (click)="openMenu()">
+        <mat-icon mat-list-icon>home</mat-icon>
+        <div mat-line>Principal</div>
+      </mat-list-item>
+
+      <!-- <mat-list-item matRipple routerLink="/search" (click)="openMenu()">
+        <mat-icon mat-list-icon>search</mat-icon>
+        <div mat-line>Busqueda elementos</div>
+      </mat-list-item> -->
+
+      <mat-list-item matRipple routerLink="/promotable-item" (click)="openMenu()">
+        <mat-icon mat-list-icon>webhook</mat-icon>
+        <div mat-line>Elemento promocionable</div>
+      </mat-list-item>
+
+      <mat-list-item matRipple routerLink="/application" (click)="openMenu()">
+        <mat-icon mat-list-icon>apps</mat-icon>
+        <div mat-line>Aplicación</div>
+      </mat-list-item>
+
+      <mat-list-item matRipple routerLink="/functional-grouping" (click)="openMenu()">
+        <mat-icon mat-list-icon>dashboard_customize</mat-icon>
+        <div mat-line>Agrupación funcional</div>
+      </mat-list-item>
+
+      <mat-list-item matRipple routerLink="/project" (click)="openMenu()">
+        <mat-icon mat-list-icon>token</mat-icon>
+        <div mat-line>Proyecto</div>
+      </mat-list-item>
+
+      <mat-list-item matRipple routerLink="/deliveries" (click)="openMenu()">
+        <mat-icon mat-list-icon>card_giftcard</mat-icon>
+        <div mat-line>Listado de entregas</div>
+      </mat-list-item>
+
+      <mat-list-item matRipple routerLink="/table-manager" (click)="openMenu()">
+        <mat-icon mat-list-icon>manage_history</mat-icon>
+        <div mat-line>Pesos y Umbrales QA</div>
+      </mat-list-item>
+
+      <span *ngIf="sessionData.user.roleId === 1">
+        <mat-divider></mat-divider>
+
+        <!--<mat-list-item matRipple routerLink="/groups" (click)="openMenu()">
+          <mat-icon mat-list-icon>group</mat-icon>
+          <div mat-line>Grupos</div>
+        </mat-list-item>-->
+  
+        <mat-list-item matRipple routerLink="/roles" (click)="openMenu()">
+          <mat-icon mat-list-icon>manage_accounts</mat-icon>
+          <div mat-line>Roles</div>
+        </mat-list-item>
+  
+        <!--<mat-list-item matRipple routerLink="/users" (click)="openMenu()">
+          <mat-icon mat-list-icon>person</mat-icon>
+          <div mat-line>Usuarios</div>
+        </mat-list-item>-->
+
+        <mat-list-item matRipple routerLink="/element-types" (click)="openMenu()">
+          <mat-icon mat-list-icon>view_in_ar</mat-icon>
+          <div mat-line>Niveles de Catálogo</div>
+        </mat-list-item>
+
+        <mat-list-item matRipple routerLink="/attributes" (click)="openMenu()">
+          <mat-icon mat-list-icon>list_alt</mat-icon>
+          <div mat-line>Atributos de Catálogo</div>
+        </mat-list-item>
+
+        <mat-list-item matRipple routerLink="/values-domain" (click)="openMenu()">
+          <mat-icon mat-list-icon>drag_indicator</mat-icon>
+          <div mat-line>Valores de Dominio</div>
+        </mat-list-item>
+        
+        <mat-list-item matRipple routerLink="/stages-qa" (click)="openMenu()">
+          <mat-icon mat-list-icon>rule_folder</mat-icon>
+          <div mat-line>Etapas de Pruebas</div>
+        </mat-list-item>
+
+        <mat-list-item matRipple routerLink="/activities-qa" (click)="openMenu()">
+          <mat-icon mat-list-icon>assignment_late</mat-icon>
+          <div mat-line>Actividades de QA</div>
+        </mat-list-item>
+
+      </span>
+    </mat-list>
+  </div>
+  <div class="hidden" (click)="openMenu()"></div>
+</div>

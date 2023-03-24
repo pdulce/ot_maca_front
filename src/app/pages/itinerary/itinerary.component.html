@@ -1,0 +1,70 @@
+<div class="content">
+  <div class="head">
+    <div class="title">Detalle de itinerario</div>
+  </div>
+
+  <div class="tableData">
+    <div class="formRO">
+      <div class="title">Descripción</div>
+
+      <div class="inputRO">
+        <div class="label">Fecha de generación de itinerario</div>
+        <div class="input">{{pageParameters.queryData?.item?.creationDate ? (pageParameters.queryData?.item?.creationDate | date:'medium') : '-'}}</div>
+      </div>
+
+      <div class="inputRO">
+        <div class="label">Código CAPP</div>
+        <div class="input">{{pageParameters.queryData?.item?.cappCode ? pageParameters.queryData?.item?.cappCode : '-'}}</div>
+      </div>
+
+      <div class="inputRO">
+        <div class="label">Es entrega</div>
+        <div class="input">{{pageParameters.queryData?.item ? 'No' : '-'}}</div>
+      </div>
+
+      <div class="inputRO">
+        <div class="label">Nombre</div>
+        <div class="input">{{pageParameters.queryData?.item?.name ? pageParameters.queryData?.item?.name : '-'}}</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- <div class="tableData" [hidden]="!(pageParameters.pageStatus == 'data')">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="stage">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Etapa </th>
+        <td mat-cell *matCellDef="let element"> {{element.stage ? element.stage : '-'}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="activity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre actividad </th>
+        <td mat-cell *matCellDef="let element"> {{element.activity ? element.activity : '-'}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="realization">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Umbral recomendado </th>
+        <td mat-cell *matCellDef="let element"> {{element.realization ? element.realization : '-'}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'create': row.style == 'create', 'update': row.style == 'update', 'delete': row.style == 'delete', 'disabled': row.included == false}"></tr>
+    </table>
+    
+    <mat-paginator [pageSize]="pageParameters.pageSizeTable" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div> -->
+
+  <div class="tableChart" *ngIf="(pageParameters.pageStatus == 'data')">
+    <iframe width="1600" height="1050" [src]="iframeUrl" title="YouTube video player" frameborder="0"></iframe>
+  </div>
+
+  <div class="loadingData" *ngIf="pageParameters.pageStatus == 'loading'">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    Calculando datos ...
+  </div>
+
+  <div class="noData" *ngIf="pageParameters.pageStatus == 'void'">
+    No hay datos
+    <br>
+    No existen pesos definidos para calcular el itinerario
+  </div>
+</div>

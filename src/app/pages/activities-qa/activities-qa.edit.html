@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Editar</h1>
+
+<div mat-dialog-content>
+  <form autocomplete="off" novalidate [formGroup]="actionForm" (ngSubmit)="submit('save')">
+    
+    <mat-form-field>
+      <input type="text" matInput placeholder="Nombre" #name maxlength="100" formControlName="name">
+      <mat-hint align="end">{{name.value.length}}/100</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Etapa de agrupación de actividades QA</mat-label>
+      <mat-select formControlName="testingStageId" required="false">
+        <mat-option *ngFor="let item of stagesQA" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Descripción" #description maxlength="200" formControlName="description">
+      <mat-hint align="end">{{description.value.length}}/200</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Ayuda" #help maxlength="200" formControlName="help">
+      <mat-hint align="end">{{help.value.length}}/200</mat-hint>
+    </mat-form-field> 
+         
+    <mat-form-field>
+      <input type="text" matInput placeholder="Umbral ideal de realización de esta actividad" #idealThreshold maxlength="200" formControlName="idealThreshold">
+      <mat-hint align="end">{{idealThreshold.value.length}}/200</mat-hint>
+    </mat-form-field>
+
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="submit('cancel')">Cancelar</button>
+  <button mat-raised-button (click)="submit('save')" [disabled]="submitLoading">
+    <mat-progress-spinner mode="indeterminate" *ngIf="submitLoading"></mat-progress-spinner>
+    Guardar
+  </button>
+</div>

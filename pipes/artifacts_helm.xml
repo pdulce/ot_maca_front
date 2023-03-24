@@ -1,0 +1,39 @@
+<artifacts>
+	<!--
+    helm
+      deploy_default
+        @runtime_tech Nombre de la teconologia de ejecucion del proyecto, a partir del cual se calcula la imagen base
+        @runtime_tech_version [OPCIONAL] Parametro para completar la imagen base. Por ejemplo, si runtime_tech tiene un valor java, la imagen base puede ser openjdk. [OPCIONAL] Con este parametro se podra indicar si se quiere openjdk-11 u openjdk-17
+        @runtime_tech_tag [OPCIONAL] Tag para la imagen base utilizada
+        @oc_namespace_suffix Sufijo del namespace de openshift en el que se realizara el despliegue
+        @chart_version Version del chart que se ejecutara para crear los artefactos HELM. El chart, se calculara a partir de runtime_tech
+
+      deploy: Cada uno de los despliegues que se pueden realizar con helm
+        @artifact: Nombre del artefacto que se desplegara. En este caso coincide con el nombre definido en artifacts.artifact.@name
+        @path_config: Path dentro del proyecto donde se encuentra la configuracion para la generacion del chart
+        @nombre_release: Nombre de la release helm que se creara en Openshift
+        @runtime_tech Igual que deploy_default@runtime_tech
+        @runtime_tech_version Igual que deploy_default@runtime_tech_version
+        @runtime_tech_tag Igual que deploy_default@runtime_tech_tag
+        @oc_namespace_suffix Igual que deploy_default@oc_namespace_suffix
+        @chart_version Igual que deploy_default@chart_version
+
+    artifact: Cada uno de lso artefactos generados por este proyecto
+      @name: Nombre del artefacto, para ser referenciado en otras partes del XML
+      nexus_file: Nombre del artefacto en el repositorio deploy de nexus.
+    -->
+	<helm>
+		<deploy_default
+				runtime_tech="javascript"
+				oc_namespace_suffix="ot-maca"
+				chart_version="develop"/>
+
+		<deploy artifact="maca-front"
+				path_config="src/main"
+				nombre_release="maca-front"/>
+	</helm>
+
+	<artifact name="maca-front">
+		<nexus_file>mad-app.zip</nexus_file>
+	</artifact>
+</artifacts>

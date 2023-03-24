@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Editar</h1>
+
+<div mat-dialog-content>
+  <form autocomplete="off" novalidate [formGroup]="actionForm" (ngSubmit)="submit('save', $event)">
+    <mat-form-field>
+      <input type="text" matInput placeholder="Nombre" #name maxlength="50" formControlName="name">
+      <mat-hint align="end">{{name.value.length}}/50</mat-hint>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="submit('cancel', $event)">Cancelar</button>
+  <button mat-raised-button (click)="submit('save', $event)" [disabled]="submitLoading">
+    <mat-progress-spinner mode="indeterminate" *ngIf="submitLoading"></mat-progress-spinner>
+    Guardar
+  </button>
+</div>

@@ -1,0 +1,173 @@
+<div class="homePage">
+  <div class="create">
+    <button mat-raised-button routerLink="/promotable-item">
+      <mat-icon>add</mat-icon>
+      Elemento promocionable
+    </button>
+    <button mat-raised-button routerLink="/application">
+      <mat-icon>add</mat-icon>
+      Aplicación
+    </button>
+    <button mat-raised-button routerLink="/functional-grouping">
+      <mat-icon>add</mat-icon>
+      Agrupacion funcional
+    </button>
+    <button mat-raised-button routerLink="/project">
+      <mat-icon>add</mat-icon>
+      Proyecto
+    </button>
+  </div>
+
+  <div class="search">
+    <!-- <mat-form-field appearance="outline">
+      <mat-label>Buscador</mat-label>
+      <input matInput placeholder="Buscar por cualquier elemento">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field> -->
+
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Buscador
+          </mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>search</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
+        <div class="form">
+          <form autocomplete="off" novalidate [formGroup]="actionForm">
+            <mat-form-field>
+              <mat-label>Tipo de Elemento de Catalogo</mat-label>
+              <mat-select formControlName="idOfCatalogueElementType">
+                <mat-option *ngFor="let item of catalogueElementTypes" [value]="item.id">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input type="text" matInput placeholder="Prefijo" #name formControlName="preffix">
+            </mat-form-field>
+        
+            <mat-form-field>
+              <input type="text" matInput placeholder="Nombre" #cap formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input type="text" matInput placeholder="Code" #cap formControlName="code">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input type="text" matInput placeholder="Nombre del responsable" #cap formControlName="responsible">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input type="text" matInput placeholder="Servicio" #cap formControlName="serviceName">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input type="text" matInput placeholder="Area funcional" #cap formControlName="functionalAreaName">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Tratamiento informatico</mat-label>
+              <mat-select formControlName="computerProcessingId">
+                <mat-option *ngFor="let item of computerProcessings" [value]="item.id">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Grupo</mat-label>
+              <mat-select formControlName="groupId">
+                <mat-option *ngFor="let item of groups" [value]="item.id">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Estado</mat-label>
+              <mat-select formControlName="situationId">
+                <mat-option *ngFor="let item of situations" [value]="item.id">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
+        </div>
+
+        <mat-action-row>
+          <button mat-raised-button (click)="search(); accordion.closeAll();">Buscar</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="table">
+    <div class="tableData" [hidden]="!(pageParameters.pageStatus == 'data')">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="catalogueElementTypeName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo elemento de catalogo </th>
+          <td mat-cell *matCellDef="let element"> {{element.catalogueElementTypeName ? element.catalogueElementTypeName : '-'}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="preffix">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Prefijo </th>
+          <td mat-cell *matCellDef="let element"> {{element.preffix ? element.preffix : '-'}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.name ? element.name : '-'}} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> CappCode </th>
+          <td mat-cell *matCellDef="let element"> {{element.code ? element.code : '-'}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="responsible">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre del responsable </th>
+          <td mat-cell *matCellDef="let element"> {{element.responsible ? element.responsible : '-'}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="serviceName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Servicio </th>
+          <td mat-cell *matCellDef="let element"> {{element.serviceName ? element.serviceName : '-'}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="functionalAreaName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Area funcional </th>
+          <td mat-cell *matCellDef="let element"> {{element.functionalAreaName ? element.functionalAreaName : '-'}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="computerProcessing">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Tratamiento informatico </th>
+          <td mat-cell *matCellDef="let element"> {{element.computerProcessing ? element.computerProcessing : '-'}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="group">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Grupo </th>
+          <td mat-cell *matCellDef="let element"> {{element.group ? element.group : '-'}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="situation">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+          <td mat-cell *matCellDef="let element"> {{element.situation ? element.situation : '-'}} </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'create': row.style == 'create', 'update': row.style == 'update', 'delete': row.style == 'delete'}"></tr>
+      </table>
+      
+      <mat-paginator [pageSize]="pageParameters.pageSizeTable" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </div>
+</div>

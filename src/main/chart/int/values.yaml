@@ -1,0 +1,47 @@
+placeholdersSubstitution:
+  enabled: true
+nginx-conf-mount-path: '/etc/nginx/'
+service:
+  spec:
+    ports:
+      insecure:
+        number: 8080
+      secure:
+        number: 8443
+      debug:
+        number: 8778
+virtualservice:
+  spec:
+    http:
+      match:
+        - uri:
+            prefix: /jobs
+        - uri:
+            prefix: /metrics
+        - uri:
+            prefix: /swagger-ui
+        - uri:
+            prefix: /
+      route:
+        port:
+          number: 8080
+
+probes:
+  readiness:
+    path: /metrics/health/readiness
+    port: 8080
+    initialDelaySeconds: 40
+  liveness:
+    path: /metrics/health/liveness
+    port: 8080
+    initialDelaySeconds: 40
+
+jaeger: true
+
+gateway:
+  spec:
+    hosts:
+      port:
+        number: 80
+
+app-config-default-java-opt: -Djava.security.egd=file:/dev/./urandom

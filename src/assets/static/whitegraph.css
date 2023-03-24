@@ -1,0 +1,60 @@
+@import "highcharts/highcharts.css";
+
+.highcharts-figure {
+    height: 400px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.highcharts-tooltip-box {
+    fill: darkgrey;
+    fill-opacity: 0.6;
+    stroke-width: 0;
+}
+
+/*
+.highcharts-tooltip text {
+    fill: white;
+    text-shadow: 0 0 3px black;
+}*/
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 2px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 190px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 2px 2px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    border: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.styled-letters {
+    font-size: 0.9em;
+}

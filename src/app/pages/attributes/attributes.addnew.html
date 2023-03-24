@@ -1,0 +1,104 @@
+<h1 mat-dialog-title>Crear nuevo</h1>
+
+<div mat-dialog-content>
+  <form autocomplete="off" novalidate [formGroup]="actionForm" (ngSubmit)="submit('save')">
+    
+    <mat-form-field>
+      <input type="text" matInput placeholder="Nombre" #name maxlength="100" formControlName="name">
+      <mat-hint align="end">{{name.value.length}}/100</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Código" #code maxlength="10" formControlName="code">
+      <mat-hint align="end">{{code.value.length}}/10</mat-hint>
+    </mat-form-field>
+
+    <br/><br/>
+
+    <mat-label>&nbsp;&nbsp;Eje QA: &nbsp;</mat-label>
+    <mat-radio-group style="border-top: 0.84375em solid transparent;" #axis aria-labelledby="group-radio" formControlName="axis">
+      <mat-radio-button *ngFor="let option of filteredOptions" [value]="option.id" color="primary">
+        {{ option.name }}&nbsp;&nbsp;
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <mat-label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Obligatorio: &nbsp;</mat-label>
+    <mat-radio-group style="border-top: 0.84375em solid transparent;" #mandatory aria-labelledby="group-radio" formControlName="mandatory">
+      <mat-radio-button *ngFor="let option of filteredOptions" [value]="option.id" color="primary">
+        {{ option.name }}&nbsp;&nbsp;
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <mat-label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Presenta un dominio de valores: &nbsp;</mat-label>
+    <mat-radio-group style="border-top: 0.84375em solid transparent;" #valuesInDomain aria-labelledby="group-radio" formControlName="valuesInDomain">
+      <mat-radio-button *ngFor="let option of filteredOptions" [value]="option.id" color="primary">
+        {{ option.name }}&nbsp;&nbsp;
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <br/><br/>
+
+    <mat-label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Proviene del CAPP: &nbsp;</mat-label>
+    <mat-radio-group style="border-top: 0.84375em solid transparent;" #fromCapp aria-labelledby="group-radio" formControlName="fromCapp">
+      <mat-radio-button *ngFor="let option of filteredOptions" [value]="option.id" color="primary">
+        {{ option.name }}&nbsp;&nbsp;
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <mat-label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Admite valores múltiples: &nbsp;</mat-label>
+    <mat-radio-group style="border-top: 0.84375em solid transparent;" #multiple aria-labelledby="group-radio" formControlName="multiple">
+      <mat-radio-button *ngFor="let option of filteredOptions" [value]="option.id" color="primary">
+        {{ option.name }}&nbsp;&nbsp;
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <br/><br/>
+
+    <mat-form-field>
+      <mat-label>Atributo del que dependen los valores de este nuevo atributo</mat-label>
+      <mat-select formControlName="axisAttributeCollateralId" required="false">
+        <mat-option *ngFor="let item of collateralAttributes" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <input type="text" matInput placeholder="Valor por defecto" #defaultValue maxlength="100" formControlName="defaultValue">
+      <mat-hint align="end">{{defaultValue.value.length}}/100</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Expresión regular de sus valores" #regex maxlength="100" formControlName="regex">
+      <mat-hint align="end">{{regex.value.length}}/100</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Ayuda" #help maxlength="100" formControlName="help">
+      <mat-hint align="end">{{help.value.length}}/100</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="text" matInput placeholder="Observaciones" #observations maxlength="100" formControlName="observations">
+      <mat-hint align="end">{{observations.value.length}}/100</mat-hint>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Niveles de elementos de catálogo donde figura este atributo</mat-label>
+      <mat-select formControlName="elementypes" multiple>
+        <mat-option *ngFor="let item of elementypes" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="submit('cancel')">Cancelar</button>
+  <button mat-raised-button (click)="submit('save')" [disabled]="submitLoading">
+    <mat-progress-spinner mode="indeterminate" *ngIf="submitLoading"></mat-progress-spinner>
+    Guardar
+  </button>
+</div>

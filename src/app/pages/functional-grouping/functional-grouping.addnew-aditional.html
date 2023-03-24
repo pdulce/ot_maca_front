@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Seleccione aplicaciones</h1>
+
+<div mat-dialog-content>
+  <div class="tableData" [hidden]="!(pageParameters.pageStatus == 'data')">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(element) : null"
+                        [checked]="selection.isSelected(element)"
+                        [aria-label]="checkboxLabel(element)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="cappCode">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Código CAPP </th>
+        <td mat-cell *matCellDef="let element"> {{element.cappCode ? element.cappCode : '-'}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.name ? element.name : '-'}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
+    <mat-paginator [pageSize]="pageParameters.pageSizeTable" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+  <div class="noData" *ngIf="pageParameters.pageStatus == 'void'">
+    No hay datos,
+    <br>
+    Cree una nueva aplicación
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="submit('cancel')">Cancelar</button>
+  <button mat-raised-button (click)="submit('save')" [disabled]="submitLoading">
+    <mat-progress-spinner mode="indeterminate" *ngIf="submitLoading"></mat-progress-spinner>
+    Guardar
+  </button>
+</div>
