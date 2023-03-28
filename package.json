@@ -14,7 +14,6 @@
   },
   "private": true,
   "dependencies": {
-    "bootstrap": "^5.0.2",
     "@angular-devkit/build-webpack": "^0.1302.2",
     "@angular-eslint/template-parser": "^13.1.0",
     "@angular-material-components/datetime-picker": "^8.0.0",
@@ -30,12 +29,13 @@
     "@angular/platform-browser": "~14.2.0",
     "@angular/platform-browser-dynamic": "~14.2.0",
     "@angular/router": "~14.2.0",
+    "@ng-select/ng-select": "^8.1.1",
+    "bootstrap": "^5.0.2",
     "moment": "^2.29.4",
     "ngx-mat-moment-adapter": "^1.0.0-beta.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4",
-    "@ng-select/ng-select": "^8.1.1"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.8",
