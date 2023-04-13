@@ -14,13 +14,13 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/build-webpack": "^0.1302.2",
+    "@angular-devkit/build-webpack": "^0.1502.6",
     "@angular-eslint/template-parser": "^13.1.0",
     "@angular-material-components/datetime-picker": "^8.0.0",
     "@angular-material-components/moment-adapter": "^8.0.0",
     "@angular/animations": "~15.2.7",
     "@angular/cdk": "~15.2.6",
-    "@angular/cli": "~15.1.2",
+    "@angular/cli": "~15.2.6",
     "@angular/common": "~15.2.7",
     "@angular/compiler": "~15.2.7",
     "@angular/core": "~15.2.7",
@@ -38,8 +38,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.2.8",
-    "@angular/cli": "~14.2.8",
+    "@angular-devkit/build-angular": "^15.2.6",
     "@angular/compiler-cli": "^15.2.7",
     "@types/jasmine": "~4.0.0",
     "jasmine-core": "~4.3.0",
